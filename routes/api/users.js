@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 
+// user model import
+const User = require("../../models/User");
+
 // @route    GET api/profile/me
 // @desc     Get current users profile
 // @access   Private
@@ -20,8 +23,17 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+    const { name, email, password } = req.body;
+
     try {
       // See of user exists
+      let user = await User.findOne({ email });
+
+      if (user) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "User already exists" }] });
+      }
 
       // GEt users gravatar
 
