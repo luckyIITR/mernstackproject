@@ -80,7 +80,7 @@ router.post(
         }
       );
 
-      console.log(req.body);
+      //   console.log(req.body);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
