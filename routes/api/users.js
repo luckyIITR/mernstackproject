@@ -21,6 +21,11 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    // See of user exists
+    // GEt users gravatar
+    // Encrypt password
+    // return jsonwebtoken
+
     console.log(req.body);
     res.send("User route");
   }
