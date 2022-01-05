@@ -15,19 +15,26 @@ router.post(
       "Please enter a password with 6 or more characters"
     ).isLength({ min: 6 }),
   ],
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+    try {
+      // See of user exists
 
-    // See of user exists
-    // GEt users gravatar
-    // Encrypt password
-    // return jsonwebtoken
+      // GEt users gravatar
 
-    console.log(req.body);
-    res.send("User route");
+      // Encrypt password
+
+      // return jsonwebtoken
+
+      console.log(req.body);
+      res.send("User route");
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
   }
 );
 
