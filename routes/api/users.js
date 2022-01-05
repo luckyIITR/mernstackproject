@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
+const gravatar = require("gravatar");
 
 // user model import
 const User = require("../../models/User");
@@ -36,7 +37,21 @@ router.post(
       }
 
       // GEt users gravatar
-
+      const avatar = normalize(
+        gravatar.url(email, {
+          s: "200",
+          r: "pg",
+          d: "mm",
+        }),
+        { forceHttps: true }
+      );
+      //instance of the user
+      user = new User({
+        name,
+        email,
+        avatar,
+        password,
+      });
       // Encrypt password
 
       // return jsonwebtoken
